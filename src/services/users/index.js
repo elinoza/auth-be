@@ -6,21 +6,25 @@ const {TokenPairs} = require("../../utils/jwt")
 
 const {checkBearerToken} = require("../../middlewares/auth")
 
-router.get("/",checkBearerToken,async(req,res,next)=>{
+const passport = require("../../utils/passport")
+
+router.get("/",passport.authenticate("jwt"),async(req,res,next)=>{
     try {
         const allUsers = await Users.find({});
         res.send(allUsers)
     } catch (error) {
+        console.log(error)
         res.status(500).send(e.message)
     }
 })
 
-router.get("/me",checkBearerToken,async(req,res,next)=>{
+router.get("/me",passport.authenticate("jwt"),async(req,res,next)=>{
     try {
         
         res.send(req.user.toJSON())
 
     } catch (error) {
+        console.log(error)
         res.status(500).send(e.message)
     }
 })

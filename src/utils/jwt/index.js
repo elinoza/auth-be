@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken")
 
-const {JWT_ACCESS_SECRET,JWT_REFRESH_SECRET} = process.env
+const {JWT_ACCESS_SECRET,JWT_REFRESH_SECRET,JWT_ISSUER,JWT_AUDIENCE} = process.env
 
 const AccessToken = async (payload) => {
     try {
-        const token = await jwt.sign(payload,JWT_ACCESS_SECRET,{expiresIn:"10000"})
+        const token = await jwt.sign(payload,JWT_ACCESS_SECRET,{expiresIn:"15m",issuer:JWT_ISSUER,audience:JWT_AUDIENCE})
         return token
     } catch (error) {
         console.log(error)
@@ -13,7 +13,7 @@ const AccessToken = async (payload) => {
 
 const RefreshToken = async(payload) => {
     try {
-        const token = await jwt.sign(payload,JWT_REFRESH_SECRET,{expiresIn:"1h"})
+        const token = await jwt.sign(payload,JWT_REFRESH_SECRET,{expiresIn:"1h",issuer:JWT_ISSUER,audience:JWT_AUDIENCE})
         return token
     } catch (error) {
         console.log(error)

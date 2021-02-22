@@ -5,7 +5,17 @@ const router = require("express").Router();
 
 const Users = require("../users/users.schema")
 
-router.post("/refreshToken",checkRefreshToken)
+const passport = require("../../utils/passport")
+
+router.post("/refreshToken",passport.authenticate("refresh"),async(req,res,next)=>{
+    try {
+        const {tokens} = req.user;
+        res.cookie("accessToken",tokens.accessToken)
+        res.cookie("refreshToken",tokens.refreshToken)
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
 
 router.post("/login",async(req,res,_next)=>{
     try {
@@ -17,6 +27,10 @@ router.post("/login",async(req,res,_next)=>{
         if(user){
 
             const tokenPairs = await TokenPairs({_id:user._id})
+
+            res.cookie("accessToken",tokenPairs.accessToken)
+
+            res.cookie("refreshToken",tokenPairs.refreshToken)
 
             res.send(tokenPairs)
         }
