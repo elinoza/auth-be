@@ -12,7 +12,9 @@ router.post("/refreshToken",passport.authenticate("refresh"),async(req,res,next)
         const {tokens} = req.user;
         res.cookie("accessToken",tokens.accessToken)
         res.cookie("refreshToken",tokens.refreshToken)
+        res.send("OK")
     } catch (error) {
+        console.log(error)
         res.status(500).send(error.message)
     }
 })
@@ -44,6 +46,12 @@ router.post("/login",async(req,res,_next)=>{
 
         res.status(500).send(error.message)
     }
+})
+
+router.get("/logout",async(req,res,_next)=>{
+    res.clearCookie("refreshToken")
+    res.clearCookie("accessToken")
+    res.redirect("http://localhost:3000/auth/login")
 })
 
 module.exports = router;

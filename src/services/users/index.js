@@ -43,7 +43,8 @@ router.post("/",async(req,res,next)=>{
         const user = await new Users(req.body).save()
 
         const tokenPair  = await TokenPairs({_id:user._id})
-        
+        res.cookie("accessToken",tokenPair.accessToken)
+        res.cookie("refreshToken",tokenPair.refreshToken)
         res.send(tokenPair)
     } catch (error) {
         

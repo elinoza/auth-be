@@ -9,7 +9,7 @@ passport.use(jwtStrategy)
 passport.use("refresh",refreshStrategy)
 
 passport.serializeUser(function(user,next){
-    next(null,user.id)
+    next(null,user)
 })
 
 
