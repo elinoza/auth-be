@@ -14,7 +14,7 @@ app.use(express.json())
 
 app.use("/api",services)
 
-
+// deployed to atlas
 const {MONGO_CONNECTION_STRING,PORT} = process.env
 
 app.listen(PORT,()=>{
