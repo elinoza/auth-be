@@ -4,7 +4,7 @@ const {JWT_ACCESS_SECRET,JWT_REFRESH_SECRET,JWT_ISSUER,JWT_AUDIENCE} = process.e
 
 const AccessToken = async (payload) => {
     try {
-        const token = await jwt.sign(payload,JWT_ACCESS_SECRET,{expiresIn:"10000",issuer:JWT_ISSUER,audience:JWT_AUDIENCE})
+        const token = await jwt.sign(payload,JWT_ACCESS_SECRET,{expiresIn:"15m",issuer:JWT_ISSUER,audience:JWT_AUDIENCE})
         return token
     } catch (error) {
         console.log(error)

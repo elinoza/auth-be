@@ -13,6 +13,7 @@ const cookieParser = require("cookie-parser")
 const passport= require("./utils/passport")
 
 const whitelist = ["http://localhost:3000"]
+
 const corsOptions = {
   origin: (origin, callback) => {
     if (whitelist.indexOf(origin) !== -1 || !origin) {

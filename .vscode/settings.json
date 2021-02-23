@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/3c192df1-fc00-4d6f-b268-9744a991cc0a/resourceGroups/strive-cloud-homeworks/providers/Microsoft.Web/sites/striveauth",
+    "appService.deploySubpath": "."
+}
